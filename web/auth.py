@@ -1,18 +1,17 @@
-'''
-This module is for creating the authentication routes for the website
-'''
-
-from flask import Blueprint
+from flask import Blueprint, render_template, url_for
+from .forms import LoginForm, RegisterForm
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/login')
+@auth.route('/login', methods=['GET', 'POST'])
 def login():
-    return 'Login'
+    form: LoginForm = LoginForm()
+    return render_template('login.html', form=form)
 
-@auth.route('/register')
+@auth.route('/register', methods=['GET', 'POST'])
 def register():
-    return 'Register'
+    form: RegisterForm = RegisterForm()
+    return render_template('register.html', form=form)
 
 @auth.route('logout')
 def logout():
